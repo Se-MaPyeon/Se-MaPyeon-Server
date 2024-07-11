@@ -18,4 +18,9 @@ public class Member {
 
     private String major;
     private String name;
+
+    public Member(String major, String name) {
+        this.major = major;
+        this.name = name;
+    }
 }

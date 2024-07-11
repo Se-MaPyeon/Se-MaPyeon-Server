@@ -1,4 +1,4 @@
-package com.semapyeon.semapyeonserver.member;
+package com.semapyeon.semapyeonserver.member.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

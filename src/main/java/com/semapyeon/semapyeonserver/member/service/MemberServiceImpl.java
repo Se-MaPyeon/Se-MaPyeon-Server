@@ -16,7 +16,10 @@ public class MemberServiceImpl implements MemberService {
     public Member loginMember(LoginRequest loginRequest) {//컨트롤러는 @RequsetBody해서 바인딩 후 넘겨주지 않을까?
         LoginApiMember response = getLoginApiMember(loginRequest);
         LoginApiBody result = response.getResult().getBody();
-        return new Member(result.getMajor(), result.getName());
+        return Member.builder()
+                .major(result.getMajor())
+                .name(result.getName())
+                .build();
     }
 
     private LoginApiMember getLoginApiMember(LoginRequest loginRequest) {

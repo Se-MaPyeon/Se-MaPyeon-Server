@@ -37,5 +37,6 @@ public class MemberController {
 
     @PostMapping("/members")
     public ResponseEntity createMember(@RequestBody LoginRequest loginRequest){
+        return null;
     }
 }

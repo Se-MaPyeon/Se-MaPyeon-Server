@@ -8,5 +8,5 @@ import lombok.Getter;
 public class LoginApiResult {
     private String authenticator;
     private LoginApiBody body;
-    private String code;
+    private String code; //실패 시 이 아이가 "auth_failed"
 }

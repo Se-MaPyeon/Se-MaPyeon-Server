@@ -1,7 +1,10 @@
 package com.semapyeon.semapyeonserver.member.service;
 
+import com.semapyeon.semapyeonserver.common.jwt.JwtTokenProvider;
+import com.semapyeon.semapyeonserver.common.jwt.TokenResponse;
 import com.semapyeon.semapyeonserver.member.dao.MemberRepository;
 import com.semapyeon.semapyeonserver.member.dto.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,17 +14,14 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
+    private final JwtTokenProvider jwtTokenProvider;
     private final MemberRepository memberRepository;
 
-    @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
     @Override
-    public MemberResponse loginMember(LoginRequest loginRequest) {
+    public TokenResponse loginMember(LoginRequest loginRequest) {
         LoginApiMember student = getLoginApiMember(loginRequest);
 
         if (!studentOfSchool(student)) {
@@ -31,11 +31,9 @@ public class MemberServiceImpl implements MemberService {
         LoginApiBody body = student.getResult().getBody();
         Member member = memberOfService(loginRequest, body); //db에 저장되어있지 않다면 저장 후 멤버 반환
 
-        return MemberResponse.builder()
-                .major(member.getMajor())
-                .name(member.getName())
-                .studentId(member.getStudentId())
-                .build();
+
+
+        return TokenResponse.of(jwtTokenProvider.generateAccessToken(member.getId()), jwtTokenProvider.generateRefreshToken(member.getId()));
     }
 
     private LoginApiMember getLoginApiMember(LoginRequest loginRequest) {

@@ -1,5 +1,6 @@
 package com.semapyeon.semapyeonserver.member.controller;
 
+import com.semapyeon.semapyeonserver.common.jwt.TokenResponse;
 import com.semapyeon.semapyeonserver.member.dto.LoginRequest;
 import com.semapyeon.semapyeonserver.member.dto.Member;
 import com.semapyeon.semapyeonserver.member.dto.MemberResponse;
@@ -26,11 +27,11 @@ public class MemberController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        MemberResponse member = memberService.loginMember(loginRequest); //전공, 이름, 학번을 담음(프론트가 필요할 정보들)
+        TokenResponse tokenResponse = memberService.loginMember(loginRequest); //전공, 이름, 학번을 담음(프론트가 필요할 정보들)
 
         //쿠키 설정 필요
         return ResponseEntity.created(URI.create("/api/v1/board"))
-                .body(member);
+                .body(tokenResponse);
 
     }
 }

@@ -31,5 +31,6 @@ public class MemberController {
         //쿠키 설정 필요
         return ResponseEntity.created(URI.create("/api/v1/board"))
                 .body(member);
+
     }
 }

@@ -9,7 +9,6 @@ import org.springframework.web.client.RestClient;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {

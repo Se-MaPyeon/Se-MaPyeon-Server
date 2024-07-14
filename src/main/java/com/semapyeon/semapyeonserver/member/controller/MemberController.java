@@ -27,16 +27,9 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         MemberResponse member = memberService.loginMember(loginRequest); //전공, 이름, 학번을 담음(프론트가 필요할 정보들)
-        if (member == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+
         //쿠키 설정 필요
         return ResponseEntity.created(URI.create("/api/v1/board"))
                 .body(member);
-    }
-
-    @PostMapping("/members")
-    public ResponseEntity createMember(@RequestBody LoginRequest loginRequest){
-        return null;
     }
 }

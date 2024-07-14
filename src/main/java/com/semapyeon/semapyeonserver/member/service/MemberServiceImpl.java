@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -21,25 +22,16 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponse joinMember(LoginRequest loginRequest) {//컨트롤러는 @RequsetBody해서 바인딩 후 넘겨주지 않을까?
-        LoginApiMember response = getLoginApiMember(loginRequest);
-        LoginApiBody result = response.getResult().getBody();
-
-        Member member = new Member(result.getMajor(), result.getName(), loginRequest.getId(), loginRequest.getPw());
-
-        Member saveMember = memberRepository.save(member);
-        return MemberResponse.builder()
-                .major(saveMember.getMajor())
-                .name(saveMember.getName())
-                .studentId(saveMember.getStudentId())
-                .build();
-    }
-
-    @Override
     public MemberResponse loginMember(LoginRequest loginRequest) {
-        Member member = memberRepository.findByStudentId(loginRequest.getId())
-                .filter(m -> m.getPw().equals(loginRequest.getPw()))
-                .orElse(null);//회원이 존재하지 않는다면 null반환
+        LoginApiMember student = getLoginApiMember(loginRequest);
+
+        if (!studentOfSchool(student)) {
+            throw new NoSuchElementException("No such student found"); //학생 아니면 오류던짐
+        }
+
+        LoginApiBody body = student.getResult().getBody();
+        Member member = memberOfService(loginRequest, body); //db에 저장되어있지 않다면 저장 후 멤버 반환
+
         return MemberResponse.builder()
                 .major(member.getMajor())
                 .name(member.getName())
@@ -56,11 +48,18 @@ public class MemberServiceImpl implements MemberService {
                 .body(LoginApiMember.class);
     }
 
-    private Member createMember(LoginRequest loginRequest) {
-        return null;
+    private boolean studentOfSchool(LoginApiMember loginApiMember) {
+        return loginApiMember.getResult().getCode().equals("success");
     }
 
-    private String createToken() {
-        return null;
+    private Member memberOfService(LoginRequest loginRequest, LoginApiBody loginApiBody) { //db에 없다면 저장
+        Optional<Member> member = memberRepository.findByStudentId(loginRequest.getId());
+        if (member.isEmpty()) {
+            Member saveMember = new Member(loginApiBody.getMajor(), loginApiBody.getName(),
+                    loginRequest.getId(), loginRequest.getPw());
+            memberRepository.save(saveMember);
+            return saveMember;
+        }
+        return member.get();
     }
 }

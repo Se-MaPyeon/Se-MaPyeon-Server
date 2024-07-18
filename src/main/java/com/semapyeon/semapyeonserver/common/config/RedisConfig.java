@@ -1,4 +1,4 @@
-package com.semapyeon.semapyeonserver.config;
+package com.semapyeon.semapyeonserver.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

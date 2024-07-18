@@ -1,5 +1,6 @@
-package com.semapyeon.semapyeonserver.member.dto;
+package com.semapyeon.semapyeonserver.api.member.dto.response;
 
+import com.semapyeon.semapyeonserver.api.member.dto.response.LoginApiResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

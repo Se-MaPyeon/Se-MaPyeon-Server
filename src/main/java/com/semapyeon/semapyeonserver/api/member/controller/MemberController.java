@@ -1,14 +1,11 @@
-package com.semapyeon.semapyeonserver.member.controller;
+package com.semapyeon.semapyeonserver.api.member.controller;
 
+import com.semapyeon.semapyeonserver.api.member.dto.request.LoginRequest;
+import com.semapyeon.semapyeonserver.api.member.service.MemberService;
 import com.semapyeon.semapyeonserver.common.jwt.TokenResponse;
-import com.semapyeon.semapyeonserver.member.dto.LoginRequest;
-import com.semapyeon.semapyeonserver.member.dto.Member;
-import com.semapyeon.semapyeonserver.member.dto.MemberResponse;
-import com.semapyeon.semapyeonserver.member.service.MemberService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

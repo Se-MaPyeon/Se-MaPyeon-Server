@@ -1,4 +1,4 @@
-package com.semapyeon.semapyeonserver.member.dto;
+package com.semapyeon.semapyeonserver.api.member.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;

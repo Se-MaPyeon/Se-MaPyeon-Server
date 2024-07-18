@@ -22,13 +22,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 
-    private static final String[] AUTH_WHITE_LIST = {"/api/oauth/login/**", "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/v2/api-docs/**",
-            "/swagger-resources/**",
-            "/api/health",
-            "/oauth/google/**"
-    };
+    private static final String[] AUTH_WHITE_LIST = {"/api/v1/login"};
 
     @Bean
     @Profile("local")

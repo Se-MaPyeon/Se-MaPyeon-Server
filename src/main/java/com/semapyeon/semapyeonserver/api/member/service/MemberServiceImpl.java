@@ -1,12 +1,14 @@
-package com.semapyeon.semapyeonserver.member.service;
+package com.semapyeon.semapyeonserver.api.member.service;
 
+import com.semapyeon.semapyeonserver.api.member.dto.response.LoginApiBody;
+import com.semapyeon.semapyeonserver.api.member.dto.response.LoginApiMember;
+import com.semapyeon.semapyeonserver.api.member.dto.request.LoginRequest;
 import com.semapyeon.semapyeonserver.common.jwt.JwtTokenProvider;
 import com.semapyeon.semapyeonserver.common.jwt.TokenResponse;
-import com.semapyeon.semapyeonserver.member.dao.MemberRepository;
-import com.semapyeon.semapyeonserver.member.dto.*;
+import com.semapyeon.semapyeonserver.db.member.entity.Member;
+import com.semapyeon.semapyeonserver.db.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -25,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
         LoginApiMember student = getLoginApiMember(loginRequest);
 
         if (!studentOfSchool(student)) {
-            throw new NoSuchElementException("No such student found"); //학생 아니면 오류던짐
+            throw new NoSuchElementException("No such student found"); //학생 아니면 오류던짐, 이견없음
         }
 
         LoginApiBody body = student.getResult().getBody();

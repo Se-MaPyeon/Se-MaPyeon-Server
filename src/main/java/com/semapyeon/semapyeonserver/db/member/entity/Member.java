@@ -2,6 +2,7 @@ package com.semapyeon.semapyeonserver.db.member.entity;
 
 import com.semapyeon.semapyeonserver.db.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,6 +27,7 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private String pw;
 
+    @Builder
     public Member(String major, String name, String studentId, String pw) {
         this.major = major;
         this.name = name;

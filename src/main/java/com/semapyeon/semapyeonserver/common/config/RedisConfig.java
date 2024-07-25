@@ -1,3 +1,4 @@
+/*
 package com.semapyeon.semapyeonserver.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,4 +41,4 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(redisConnectionFactory());
         return redisTemplate;
     }
-}
+}*/

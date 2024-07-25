@@ -22,10 +22,11 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 
-    private static final String[] AUTH_WHITE_LIST = {"/api/v1/login"};
+    private static final String[] AUTH_WHITE_LIST = {
+            "/api/v1/**"
+    };
 
     @Bean
-    @Profile("local")
     SecurityFilterChain securityFilterChainLocal(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)

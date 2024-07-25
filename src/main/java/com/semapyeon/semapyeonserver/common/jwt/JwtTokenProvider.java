@@ -24,10 +24,12 @@ public class JwtTokenProvider {
 
     private static final Long REFRESH_TOKEN_EXPIRATION_TIME = 1000L * 60 * 60 * 24 * 7;
 
-    @Value("${JWT_SECRET_DEV}")
+    @Value("${jwt.secret}")
     private String JWT_SECRET;
 
+/*
     private final RedisTemplate<String, String> redisTemplate;
+*/
 
     public TokenResponse reissueToken(Long memberId) {
         return TokenResponse.of(
@@ -65,12 +67,12 @@ public class JwtTokenProvider {
                 .signWith(getSigningKey()) // Signature
                 .compact();
 
-        redisTemplate.opsForValue().set(
+/*        redisTemplate.opsForValue().set(
                 refreshToken,
                 String.valueOf(memberId),
                 REFRESH_TOKEN_EXPIRATION_TIME,
                 TimeUnit.MILLISECONDS
-        );
+        );*/
 
         return refreshToken;
     }

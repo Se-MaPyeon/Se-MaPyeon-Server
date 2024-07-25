@@ -37,4 +37,12 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.OK).body(APISuccessResponse.of(SuccessMessage.WRITE_BOARD_SUCCESS.getMessage(), SuccessMessage.WRITE_BOARD_SUCCESS.getStatus(), null));
     }
 
+    @DeleteMapping("/board/{boardId}")
+    public ResponseEntity<APISuccessResponse<Void>> deleteBoard(
+            @PathVariable(name = "boardId") Long boardId
+    ) {
+        boardService.deleteBoard(boardId);
+        return ResponseEntity.status(HttpStatus.OK).body(APISuccessResponse.of(SuccessMessage.DELETE_BOARD_SUCCESS.getMessage(), SuccessMessage.DELETE_BOARD_SUCCESS.getStatus(), null));
+    }
+
 }

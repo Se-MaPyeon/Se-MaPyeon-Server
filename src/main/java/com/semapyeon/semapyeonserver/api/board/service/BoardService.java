@@ -5,10 +5,12 @@ import com.semapyeon.semapyeonserver.api.board.dto.response.BoardResponse;
 import com.semapyeon.semapyeonserver.api.board.dto.response.BoardsResponse;
 import com.semapyeon.semapyeonserver.db.board.entity.Board;
 import com.semapyeon.semapyeonserver.db.board.repository.BoardRepository;
+import com.semapyeon.semapyeonserver.db.like.repository.LikeRepository;
 import com.semapyeon.semapyeonserver.db.member.repository.MemberRepository;
 import com.semapyeon.semapyeonserver.enums.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
+    private final LikeRepository likeRepository;
 
     public BoardsResponse getBoards(Category category) {
         List<Board> boards;
@@ -40,14 +43,21 @@ public class BoardService {
                 .toList());
     }
 
+    @Transactional
     public void writeBoard(Long memberId, WriteBoardRequest writeBoardRequest) {
         boardRepository.save(Board.builder()
                 .title(writeBoardRequest.title())
                 .content(writeBoardRequest.content())
                 .category(writeBoardRequest.category())
                 .member(memberRepository.findById(memberId).orElseThrow(
-                        () -> new RuntimeException()
+                        RuntimeException::new
                 ))
                 .build());
+    }
+
+    @Transactional
+    public void deleteBoard(Long boardId) {
+        likeRepository.deleteAllByBoardId(boardId);
+        boardRepository.deleteById(boardId);
     }
 }

@@ -34,7 +34,7 @@ public class BoardController {
     ) {
         Long memberId = principalHandler.getMemberIdFromPrincipal();
         boardService.writeBoard(memberId, writeBoardRequest);
-        return ResponseEntity.status(HttpStatus.OK).body(APISuccessResponse.of(SuccessMessage.WRITE_BOARD_SUCCESS.getMessage(), SuccessMessage.WRITE_BOARD_SUCCESS.getStatus(), null));
+        return ResponseEntity.status(HttpStatus.CREATED).body(APISuccessResponse.of(SuccessMessage.WRITE_BOARD_SUCCESS.getMessage(), SuccessMessage.WRITE_BOARD_SUCCESS.getStatus(), null));
     }
 
     @DeleteMapping("/board/{boardId}")
@@ -42,7 +42,7 @@ public class BoardController {
             @PathVariable(name = "boardId") Long boardId
     ) {
         boardService.deleteBoard(boardId);
-        return ResponseEntity.status(HttpStatus.OK).body(APISuccessResponse.of(SuccessMessage.DELETE_BOARD_SUCCESS.getMessage(), SuccessMessage.DELETE_BOARD_SUCCESS.getStatus(), null));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(APISuccessResponse.of(SuccessMessage.DELETE_BOARD_SUCCESS.getMessage(), SuccessMessage.DELETE_BOARD_SUCCESS.getStatus(), null));
     }
 
 }

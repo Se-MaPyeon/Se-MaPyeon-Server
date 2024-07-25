@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LikeRepository extends JpaRepository<Likes, Long> {
     void deleteAllByBoardId(Long boardId);
+
+    void deleteByMemberIdAndBoardId(Long memberId, Long boardId);
 }

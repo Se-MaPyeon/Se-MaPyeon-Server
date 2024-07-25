@@ -28,4 +28,12 @@ public class BoardService {
                 .map(board -> BoardResponse.of(board.getId(), board.getTitle(), board.getContent(), board.getCategory().getCategory(), board.getUpdatedAt().toString(), board.getLikes()))
                 .toList());
     }
+
+    public BoardsResponse getMyBoards(Long memberId) {
+        List<Board> boards = boardRepository.findAllByMemberId(memberId);
+
+        return BoardsResponse.of(boards.stream()
+                .map(board -> BoardResponse.of(board.getId(), board.getTitle(), board.getContent(), board.getCategory().getCategory(), board.getUpdatedAt().toString(), board.getLikes()))
+                .toList());
+    }
 }

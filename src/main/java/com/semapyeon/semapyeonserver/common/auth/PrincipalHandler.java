@@ -1,7 +1,9 @@
 package com.semapyeon.semapyeonserver.common.auth;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrincipalHandler {
 
     private static final String ANONYMOUS_MEMBER = "anonymousMember";

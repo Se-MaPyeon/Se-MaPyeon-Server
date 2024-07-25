@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum SuccessMessage {
 
-    GET_BOARDS_SUCCESS("게시글 리스트 조회 성공", HttpStatus.OK.value());
+    GET_BOARDS_SUCCESS("게시글 리스트 조회 성공", HttpStatus.OK.value()),
+    GET_MY_BOARDS_SUCCESS("마이페이지 조회 성공", HttpStatus.OK.value());
 
     private final String message;
     private final int status;

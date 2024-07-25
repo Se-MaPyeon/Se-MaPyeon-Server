@@ -1,6 +1,7 @@
 package com.semapyeon.semapyeonserver.db.board.entity;
 
 import com.semapyeon.semapyeonserver.db.BaseTimeEntity;
+import com.semapyeon.semapyeonserver.db.member.entity.Member;
 import com.semapyeon.semapyeonserver.enums.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class Board extends BaseTimeEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, columnDefinition = "TEXT")
     Category category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = false)
+    Member member;
 
     @ColumnDefault("0")
     Integer likes = 0;

@@ -29,7 +29,6 @@ public class Board extends BaseTimeEntity {
     Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
     Member member;
 
     @ColumnDefault("0")

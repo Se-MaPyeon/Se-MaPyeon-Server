@@ -34,4 +34,13 @@ public class LikeController {
         likeService.deleteLike(memberId, boardId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(APISuccessResponse.of(SuccessMessage.DELETE_LIKE_SUCCESS.getMessage(), SuccessMessage.DELETE_LIKE_SUCCESS.getStatus(), null));
     }
+
+    // 추천 수를 반환하는 엔드포인트 추가
+    @GetMapping("/like/{boardId}/count")
+    public ResponseEntity<APISuccessResponse<Integer>> getLikeCount(
+            @PathVariable(name = "boardId") Long boardId
+    ) {
+        int likeCount = likeService.getLikeCount(boardId);
+        return ResponseEntity.status(HttpStatus.OK).body(APISuccessResponse.of(SuccessMessage.GET_LIKE_COUNT_SUCCESS.getMessage(), SuccessMessage.GET_LIKE_COUNT_SUCCESS.getStatus(), likeCount));
+    }
 }

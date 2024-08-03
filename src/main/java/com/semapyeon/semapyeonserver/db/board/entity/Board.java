@@ -41,4 +41,8 @@ public class Board extends BaseTimeEntity {
         this.category = category;
         this.member = member;
     }
+
+    public void addLikes() {
+        this.likes++;
+    }
 }

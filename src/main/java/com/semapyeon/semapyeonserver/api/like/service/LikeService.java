@@ -26,7 +26,9 @@ public class LikeService {
         Board board = boardRepository.findById(boardId).orElseThrow(
                 RuntimeException::new
         );
-        likeRepository.save(Likes.builder().member(member).board(board).build());
+        Likes likesBoard = Likes.builder().member(member).board(board).build();
+        likeRepository.save(likesBoard); //저장
+        board.addLikes(); //추천 수 증가
     }
 
     @Transactional

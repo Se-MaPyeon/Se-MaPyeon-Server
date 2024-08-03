@@ -35,4 +35,13 @@ public class LikeService {
     public void deleteLike(Long memberId, Long boardId) {
         likeRepository.deleteByMemberIdAndBoardId(memberId, boardId);
     }
+
+    // 추천 수를 반환하는 메서드 추가
+    @Transactional(readOnly = true)
+    public int getLikeCount(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(
+                RuntimeException::new
+        );
+        return board.getLikes();
+    }
 }

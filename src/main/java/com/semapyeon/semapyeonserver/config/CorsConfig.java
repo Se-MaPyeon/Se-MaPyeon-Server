@@ -18,6 +18,7 @@ public class CorsConfig {
         config.addAllowedOrigin("http://localhost");
         config.addAllowedOrigin("http://43.200.67.235:8080");
         config.addAllowedOrigin("http://43.200.67.235");
+        config.addAllowedOrigin("https://semapyeon.netlify.app"); // 배포 링크 추가
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

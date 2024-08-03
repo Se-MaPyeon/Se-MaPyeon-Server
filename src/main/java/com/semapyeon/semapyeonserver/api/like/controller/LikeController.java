@@ -22,7 +22,7 @@ public class LikeController {
             @PathVariable(name = "boardId") Long boardId
     ) {
         Long memberId = principalHandler.getMemberIdFromPrincipal();
-        likeService.createLike(memberId, boardId);
+        likeService.createLike(memberId, boardId); //추천 저장 수행
         return ResponseEntity.status(HttpStatus.CREATED).body(APISuccessResponse.of(SuccessMessage.CREATE_LIKE_SUCCESS.getMessage(), SuccessMessage.CREATE_LIKE_SUCCESS.getStatus(), null));
     }
 

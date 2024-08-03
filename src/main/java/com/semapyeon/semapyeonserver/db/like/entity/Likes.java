@@ -5,8 +5,10 @@ import com.semapyeon.semapyeonserver.db.board.entity.Board;
 import com.semapyeon.semapyeonserver.db.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor
 public class Likes extends BaseTimeEntity {

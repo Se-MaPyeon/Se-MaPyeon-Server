@@ -13,7 +13,8 @@ public enum SuccessMessage {
     WRITE_BOARD_SUCCESS("게시글 작성 성공", HttpStatus.CREATED.value()),
     DELETE_BOARD_SUCCESS("게시글 삭제 성공", HttpStatus.NO_CONTENT.value()),
     CREATE_LIKE_SUCCESS("추천 성공", HttpStatus.CREATED.value()),
-    DELETE_LIKE_SUCCESS("추천 취소 성공", HttpStatus.NO_CONTENT.value());
+    DELETE_LIKE_SUCCESS("추천 취소 성공", HttpStatus.NO_CONTENT.value()),
+    GET_LIKE_COUNT_SUCCESS("추천 수 조회 성공", HttpStatus.OK.value());
 
     private final String message;
     private final int status;
